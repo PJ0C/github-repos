@@ -1,33 +1,22 @@
 {
   "env": {
     "browser": true,
-    "es2020": true
+    "es2021": true
   },
-  "extends": [
-    "plugin:react/recommended",
-    "standard",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["plugin:react/recommended", "standard", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 11,
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "no-unused-vars": "warn",
-    "camelcase": "off",
-    "react/prop-types": "off",
-    "no-unused-expressions": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "no-multi-str": "off",
-    "jsx-a11y/anchor-is-valid": 0
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"]
   }
 }
+
