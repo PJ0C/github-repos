@@ -3,6 +3,7 @@ import React, { FormEvent, useState } from 'react';
 import Button from '@mui/material/Button';
 import NameForm from './NameForm';
 import styles from './Repos.module.css';
+import RepoList from './RepoList';
 
 const Repos: React.FC = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -37,13 +38,16 @@ const Repos: React.FC = () => {
         <button type="submit" style={{ display: 'none' }} />
       </form>
 
-      <Button variant="contained" disabled={buttonDisabled} onClick={() => fetchRepositories()}>
+      <Button
+        className="search-button"
+        variant="contained"
+        disabled={buttonDisabled}
+        onClick={() => fetchRepositories()}
+      >
         buscar repositórios
       </Button>
 
-      {repos.map(repo => (
-        <p key={repo.full_name}>{repo.full_name}</p>
-      ))}
+      <RepoList repos={repos} />
     </div>
   );
 };

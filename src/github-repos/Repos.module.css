@@ -4,4 +4,9 @@
   align-items: center;
   min-height: 400px;
   flex-direction: column;
+  min-width: 600px;
+}
+
+.container .search-button {
+  border-top: 10px;
 }
