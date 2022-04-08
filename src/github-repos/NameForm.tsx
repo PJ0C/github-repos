@@ -7,12 +7,10 @@ interface NameProps {
 
 const NameForm: React.FC<NameProps> = ({ username, setUsername }) => {
   return (
-    <form>
-      <label>
-        Digite o url:
-        <input type="text" value={username} onChange={event => setUsername(event.target.value)} />
-      </label>
-    </form>
+    <label>
+      Digite o url:
+      <input type="text" value={username} onChange={event => setUsername(event.target.value)} />
+    </label>
   );
 };
 
