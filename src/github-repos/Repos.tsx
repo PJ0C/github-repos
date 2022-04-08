@@ -1,17 +1,20 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Button from '@mui/material/Button';
-import NameForm from './InsertUrl';
+import NameForm from './NameForm';
 
 const Repos: React.FC = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [repos, setRepos] = useState<any[]>([]);
+  const [username, setUsername] = useState('');
 
-  function fetchRepositories() {
+  function fetchRepositories(event?: FormEvent<HTMLFormElement>) {
+    event?.preventDefault();
+
     setButtonDisabled(true);
 
     axios
-      .get('https://api.github.com/users/raphaelcarreiro/repos')
+      .get(`https://api.github.com/users/${username}/repos`)
       .then(response => {
         setRepos(response.data);
       })
@@ -31,8 +34,12 @@ const Repos: React.FC = () => {
     >
       <span>Repos</span>
 
-      <NameForm />
-      <Button variant="contained" disabled={buttonDisabled} onClick={fetchRepositories}>
+      <form onSubmit={fetchRepositories}>
+        <NameForm username={username} setUsername={setUsername} />
+        <button type="submit" style={{ display: 'none' }} />
+      </form>
+
+      <Button variant="contained" disabled={buttonDisabled} onClick={() => fetchRepositories()}>
         buscar repositórios
       </Button>
 
