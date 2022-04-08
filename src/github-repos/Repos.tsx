@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { FormEvent, useState } from 'react';
 import Button from '@mui/material/Button';
 import NameForm from './NameForm';
+import styles from './Repos.module.css';
 
 const Repos: React.FC = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -10,6 +11,11 @@ const Repos: React.FC = () => {
 
   function fetchRepositories(event?: FormEvent<HTMLFormElement>) {
     event?.preventDefault();
+
+    if (!username) {
+      setRepos([]);
+      return;
+    }
 
     setButtonDisabled(true);
 
@@ -23,15 +29,7 @@ const Repos: React.FC = () => {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: 400,
-        flexDirection: 'column',
-      }}
-    >
+    <div className={styles.container}>
       <span>Repos</span>
 
       <form onSubmit={fetchRepositories}>
