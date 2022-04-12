@@ -1,11 +1,26 @@
 import axios from 'axios';
 import React, { FormEvent, useState } from 'react';
-import Button from '@mui/material/Button';
 import NameForm from './NameForm';
-import styles from './Repos.module.css';
 import RepoList from './RepoList';
+import { Button, makeStyles } from '@material-ui/core';
+
+const styles = makeStyles({
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 400,
+    flexDirection: 'column',
+    minWidth: 600,
+  },
+  seachButton: {
+    marginTop: 10,
+  },
+});
 
 const Repos: React.FC = () => {
+  const classes = styles();
+
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [repos, setRepos] = useState<any[]>([]);
   const [username, setUsername] = useState('');
@@ -30,7 +45,7 @@ const Repos: React.FC = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={classes.container}>
       <span>Repos</span>
 
       <form onSubmit={fetchRepositories}>
@@ -39,10 +54,11 @@ const Repos: React.FC = () => {
       </form>
 
       <Button
-        className="search-button"
+        className={classes.seachButton}
         variant="contained"
         disabled={buttonDisabled}
         onClick={() => fetchRepositories()}
+        color="primary"
       >
         buscar repositórios
       </Button>
