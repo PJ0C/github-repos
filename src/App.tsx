@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import Repos from './github-repos/Repos';
+import Repos from './repos/Repos';
 function App() {
   return (
     <>
