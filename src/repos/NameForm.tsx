@@ -1,5 +1,5 @@
+import React, { Dispatch, SetStateAction } from 'react';
 import { IconButton, InputAdornment, TextField } from '@material-ui/core';
-import React, { Dispatch, FormEvent, SetStateAction } from 'react';
 import { Search as SearchIcon } from '@material-ui/icons';
 
 interface NameProps {

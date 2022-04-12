@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { FormEvent, useState } from 'react';
 import RepoList from './RepoList';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Typography, makeStyles, Theme } from '@material-ui/core';
 import NameForm from './NameForm';
-import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
