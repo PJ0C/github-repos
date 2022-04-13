@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { FormEvent, useState } from 'react';
 import RepoList from './RepoList';
 import { Typography, makeStyles, Theme } from '@material-ui/core';
 import NameForm from './NameForm';
+import RepoError from './RepoError';
+import api from 'services/api';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -23,6 +24,7 @@ const Repos: React.FC = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [repos, setRepos] = useState<any[]>([]);
   const [username, setUsername] = useState('');
+  const [error, setError] = useState('');
 
   function fetchRepositories(event?: FormEvent<HTMLFormElement>) {
     event?.preventDefault();
@@ -34,8 +36,8 @@ const Repos: React.FC = () => {
 
     setButtonDisabled(true);
 
-    axios
-      .get(`https://api.github.com/users/${username}/repos`)
+    api
+      .get(`/users/${username}/repos`)
       .then(response => {
         setRepos(response.data);
       })
@@ -48,12 +50,17 @@ const Repos: React.FC = () => {
       <Typography align="center" variant="h6">
         Repositórios GitHub
       </Typography>
+      {!error ? (
+        <>
+          <form className={classes.form} onSubmit={fetchRepositories}>
+            <NameForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
+          </form>
 
-      <form className={classes.form} onSubmit={fetchRepositories}>
-        <NameForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
-      </form>
-
-      <RepoList repos={repos} />
+          <RepoList repos={repos} />
+        </>
+      ) : (
+        <RepoError error={error} />
+      )}
     </div>
   );
 };
