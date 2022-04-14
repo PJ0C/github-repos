@@ -4,6 +4,8 @@ import { Typography, makeStyles, Theme } from '@material-ui/core';
 import NameForm from './NameForm';
 import RepoError from './RepoError';
 import api from 'services/api';
+import RepoEmpty from './RepoEmpty';
+import RepoOwner from './RepoOwner';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -29,14 +31,13 @@ const Repos: React.FC = () => {
   const [repos, setRepos] = useState<any[]>([]);
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
-  const [vazio, setVazio] = useState('');
+  const [owner, setOwner] = useState<any>(null);
 
   function fetchRepositories(event?: FormEvent<HTMLFormElement>) {
     event?.preventDefault();
 
     if (!username) {
       setRepos([]);
-      setVazio('Digite o nome de um usuário para ver os repositórios');
       return;
     }
 
@@ -46,6 +47,7 @@ const Repos: React.FC = () => {
       .get(`/users/${username}/repos`)
       .then(response => {
         setRepos(response.data);
+        setOwner(response.data[0].owner);
       })
       .catch(error => {
         console.error(error);
@@ -61,18 +63,20 @@ const Repos: React.FC = () => {
       <Typography align="center" variant="h6">
         Repositórios GitHub
       </Typography>
-      {!error ? (
+
+      <form className={classes.form} onSubmit={fetchRepositories}>
+        <NameForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
+      </form>
+
+      {repos.length === 0 ? (
+        <RepoEmpty />
+      ) : error ? (
+        <RepoError error={error} setError={setError} />
+      ) : (
         <>
-          <form className={classes.form} onSubmit={fetchRepositories}>
-            <NameForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
-          </form>
-          <Typography align="center" variant="h6">
-            {vazio}
-          </Typography>
+          <RepoOwner owner={owner} />
           <RepoList repos={repos} />
         </>
-      ) : (
-        <RepoError error={error} setError={setError} />
       )}
     </div>
   );
