@@ -29,12 +29,14 @@ const Repos: React.FC = () => {
   const [repos, setRepos] = useState<any[]>([]);
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
+  const [vazio, setVazio] = useState('');
 
   function fetchRepositories(event?: FormEvent<HTMLFormElement>) {
     event?.preventDefault();
 
     if (!username) {
       setRepos([]);
+      setVazio('Digite o nome de um usuário para ver os repositórios');
       return;
     }
 
@@ -64,7 +66,9 @@ const Repos: React.FC = () => {
           <form className={classes.form} onSubmit={fetchRepositories}>
             <NameForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
           </form>
-
+          <Typography align="center" variant="h6">
+            {vazio}
+          </Typography>
           <RepoList repos={repos} />
         </>
       ) : (

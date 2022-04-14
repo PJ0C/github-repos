@@ -22,6 +22,7 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo }) => {
 
   return (
     <ListItem button className={classes.li}>
+      <img src="https://avatars.githubusercontent.com/u/102804886?v=4" width="32 " alt="" />
       <p key={repo.full_name}>{repo.full_name}</p>
     </ListItem>
   );
