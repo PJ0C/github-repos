@@ -9,10 +9,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 auto',
+    margin: '30px auto',
     maxWidth: 600,
     width: '100%',
-    marginTop: 30,
+    minHeight: '100vh',
+    border: '2px solid #ddc6a3',
+    padding: 20,
+    borderRadius: 4,
+    backgroundColor: 'white',
   },
   form: {
     marginTop: 40,
@@ -41,9 +45,10 @@ const Repos: React.FC = () => {
       .then(response => {
         setRepos(response.data);
       })
-      .catch(err => {
-        console.error(err);
-        setError('Erro, usuário não encontrado');
+      .catch(error => {
+        console.error(error);
+        setError(error.message);
+        setRepos([]);
       })
 
       .finally(() => setButtonDisabled(false));
@@ -63,7 +68,7 @@ const Repos: React.FC = () => {
           <RepoList repos={repos} />
         </>
       ) : (
-        <RepoError error={error} />
+        <RepoError error={error} setError={setError} />
       )}
     </div>
   );
