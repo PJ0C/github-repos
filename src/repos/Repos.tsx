@@ -41,7 +41,11 @@ const Repos: React.FC = () => {
       .then(response => {
         setRepos(response.data);
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error(err);
+        setError('Erro, usuário não encontrado');
+      })
+
       .finally(() => setButtonDisabled(false));
   }
 
