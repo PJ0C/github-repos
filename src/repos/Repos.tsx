@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 import RepoList from './RepoList';
 import { Typography, makeStyles, Theme } from '@material-ui/core';
-import NameForm from './NameForm';
+import RepoForm from './RepoForm';
 import RepoError from './RepoError';
 import api from 'services/api';
 import RepoEmpty from './RepoEmpty';
@@ -65,7 +65,7 @@ const Repos: React.FC = () => {
       </Typography>
 
       <form className={classes.form} onSubmit={fetchRepositories}>
-        <NameForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
+        <RepoForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
       </form>
 
       {repos.length === 0 ? (

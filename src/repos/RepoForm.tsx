@@ -8,7 +8,7 @@ interface NameProps {
   buttonDisabled: boolean;
 }
 
-const NameForm: React.FC<NameProps> = ({ username, setUsername, buttonDisabled }) => {
+const RepoForm: React.FC<NameProps> = ({ username, setUsername, buttonDisabled }) => {
   return (
     <TextField
       label="Pesquisa"
@@ -31,4 +31,4 @@ const NameForm: React.FC<NameProps> = ({ username, setUsername, buttonDisabled }
   );
 };
 
-export default NameForm;
+export default RepoForm;
