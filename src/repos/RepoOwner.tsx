@@ -9,7 +9,7 @@ const RepoOwner: React.FC<RepoOwnerProps> = ({ owner }) => {
   return (
     <div>
       <Typography>{owner?.login}</Typography>
-      <img src={owner.avatar_url} alt="" />
+      <img src={owner?.avatar_url} alt="" />
     </div>
   );
 };
