@@ -1,11 +1,13 @@
 import React, { FormEvent, useState } from 'react';
 import RepoList from './RepoList';
-import { Typography, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import RepoForm from './RepoForm';
 import RepoError from './RepoError';
 import api from 'services/api';
 import RepoEmpty from './RepoEmpty';
 import RepoOwner from './RepoOwner';
+import Chip from '@material-ui/core/Chip';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -60,9 +62,7 @@ const Repos: React.FC = () => {
 
   return (
     <div className={classes.container}>
-      <Typography align="center" variant="h6">
-        Repositórios GitHub
-      </Typography>
+      <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
 
       <form className={classes.form} onSubmit={fetchRepositories}>
         <RepoForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
@@ -75,6 +75,7 @@ const Repos: React.FC = () => {
       ) : (
         <>
           <RepoOwner owner={owner} />
+
           <RepoList repos={repos} />
         </>
       )}

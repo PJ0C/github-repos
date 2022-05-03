@@ -5,8 +5,9 @@ import RepoItem from './RepoItem';
 const styles = makeStyles({
   ul: {
     display: 'grid',
-    gap: '15px',
-    marginTop: 30,
+    gap: '15 px',
+    marginTop: 50,
+    justifyContent: 'center',
   },
 });
 
