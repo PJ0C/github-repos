@@ -6,16 +6,20 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const styles = makeStyles({
   li: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
+    display: 'grid',
+
     minWidth: 600,
     boxShadow: '0 1px 4px 1px #ccc',
     borderRadius: 4,
   },
   align: {
     display: 'flex',
+  },
+  alignvisibility: {
+    marginLeft: '500px',
+  },
+  marginrepos: {
+    marginTop: '-27px',
   },
 });
 
@@ -28,9 +32,9 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo }) => {
 
   return (
     <ListItem button className={classes.li}>
-      <p key={repo.full_name}>
+      <Chip className={classes.alignvisibility} icon={<VisibilityIcon />} label={repo.visibility} />
+      <p className={classes.marginrepos} key={repo.full_name}>
         {repo.full_name}
-        <Chip icon={<VisibilityIcon />} label={repo.visibility} />
       </p>
 
       <p className={classes.align} key={repo.language}>

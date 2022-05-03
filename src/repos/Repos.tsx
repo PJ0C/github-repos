@@ -75,7 +75,6 @@ const Repos: React.FC = () => {
       ) : (
         <>
           <RepoOwner owner={owner} />
-
           <RepoList repos={repos} />
         </>
       )}

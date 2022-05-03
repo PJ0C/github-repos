@@ -9,15 +9,21 @@ interface RepoOwnerProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'grid',
+      display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
+
       marginTop: 10,
-      width: '220px',
-      height: '220px',
-      margin: '30px auto',
-      borderRadius: '50%',
-      border: '1px solid #000',
+
+      height: '190px',
+      margin: '1px ',
+    },
+    espaco: {
+      marginLeft: '20px',
+      marginTop: '-10px',
+    },
+    espaceurl: {
+      marginTop: 40,
+      marginLeft: '-72px auto',
     },
 
     size: {
@@ -32,7 +38,8 @@ const RepoOwner: React.FC<RepoOwnerProps> = ({ owner }) => {
   return (
     <div className={classes.root}>
       <Avatar alt="usuario" src={owner?.avatar_url} className={classes.size} />
-      <Typography align="center">{owner?.login}</Typography>
+      <Typography className={classes.espaco}>{owner?.login} </Typography>
+      <Typography className={classes.espaceurl}>{owner?.repos_url}</Typography>
     </div>
   );
 };
