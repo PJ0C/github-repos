@@ -6,7 +6,6 @@ const styles = makeStyles({
   ul: {
     display: 'grid',
     gap: '15 px',
-    marginTop: 50,
     justifyContent: 'center',
   },
 });
