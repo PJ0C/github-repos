@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
       border: `2px solid ${theme.palette.primary.main}`,
       background: '#fff',
       padding: 3,
+      '& img': {
+        borderRadius: '50%',
+      },
     },
     ownerData: {},
   }),

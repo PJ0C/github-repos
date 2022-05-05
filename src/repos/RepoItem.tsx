@@ -1,4 +1,4 @@
-import { ListItem, makeStyles } from '@material-ui/core';
+import { ListItem, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import CodeIcon from '@material-ui/icons/Code';
 import Chip from '@material-ui/core/Chip';
@@ -14,12 +14,16 @@ const styles = makeStyles({
   },
   align: {
     display: 'flex',
+    marginTop: '15px',
+  },
+  alignicon: {
+    marginTop: '-2px',
   },
   alignvisibility: {
     marginLeft: '500px',
   },
   marginrepos: {
-    marginTop: '-27px',
+    marginTop: '-35px',
   },
 });
 
@@ -33,14 +37,14 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo }) => {
   return (
     <ListItem button className={classes.li}>
       <Chip className={classes.alignvisibility} icon={<VisibilityIcon />} label={repo.visibility} />
-      <p className={classes.marginrepos} key={repo.full_name}>
+      <Typography variant="h6" className={classes.marginrepos} key={repo.full_name}>
         {repo.full_name}
-      </p>
+      </Typography>
 
-      <p className={classes.align} key={repo.language}>
-        <CodeIcon />
+      <Typography color="textSecondary" variant="body2" className={classes.align} key={repo.language}>
+        <CodeIcon className={classes.alignicon} />
         {repo.language}
-      </p>
+      </Typography>
     </ListItem>
   );
 };
