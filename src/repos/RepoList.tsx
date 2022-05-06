@@ -5,8 +5,8 @@ import RepoItem from './RepoItem';
 const styles = makeStyles({
   ul: {
     display: 'grid',
-    gap: '15 px',
-    justifyContent: 'center',
+    gap: 15,
+    margin: '0 20px 20px',
   },
 });
 
@@ -18,7 +18,7 @@ const RepoList: React.FC<RepoListItemProps> = ({ repos }) => {
   const classes = styles();
 
   return (
-    <List className={classes.ul}>
+    <List className={classes.ul} disablePadding>
       {repos.map(repo => (
         <RepoItem repo={repo} key={repo.id} />
       ))}

@@ -6,24 +6,29 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const styles = makeStyles({
   li: {
-    display: 'grid',
-
-    minWidth: 600,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    margin: '5px',
     boxShadow: '0 1px 4px 1px #ccc',
     borderRadius: 4,
+    flex: 1,
   },
-  align: {
+  language: {
     display: 'flex',
     marginTop: '15px',
   },
-  alignicon: {
+  icon: {
     marginTop: '-2px',
   },
-  alignvisibility: {
-    marginLeft: '500px',
+  chip: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
   },
-  marginrepos: {
-    marginTop: '-35px',
+  repositoryname: {
+    marginTop: '5px',
+    maxWidth: '75%',
   },
 });
 
@@ -36,13 +41,12 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo }) => {
 
   return (
     <ListItem button className={classes.li}>
-      <Chip className={classes.alignvisibility} icon={<VisibilityIcon />} label={repo.visibility} />
-      <Typography variant="h6" className={classes.marginrepos} key={repo.full_name}>
+      <Chip className={classes.chip} icon={<VisibilityIcon />} label={repo.visibility} />
+      <Typography variant="h6" className={classes.repositoryname} key={repo.full_name}>
         {repo.full_name}
       </Typography>
-
-      <Typography color="textSecondary" variant="body2" className={classes.align} key={repo.language}>
-        <CodeIcon className={classes.alignicon} />
+      <Typography color="textSecondary" variant="body2" className={classes.language} key={repo.language}>
+        <CodeIcon className={classes.icon} />
         {repo.language}
       </Typography>
     </ListItem>

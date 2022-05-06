@@ -8,13 +8,14 @@ import RepoEmpty from './RepoEmpty';
 import RepoOwner from './RepoOwner';
 import Chip from '@material-ui/core/Chip';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import Reposrouter from './RepoRouter';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
     margin: '30px auto',
-    maxWidth: 600,
+    maxWidth: 800,
     width: '100%',
     minHeight: '100vh',
     border: '2px solid #ddc6a3',
@@ -74,6 +75,7 @@ const Repos: React.FC = () => {
         <RepoError error={error} setError={setError} />
       ) : (
         <>
+          <Reposrouter />
           <RepoOwner owner={owner} />
           <RepoList repos={repos} />
         </>
