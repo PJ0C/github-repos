@@ -1,13 +1,9 @@
-import React, { FormEvent, useState } from 'react';
-import RepoList from './RepoList';
-import { makeStyles, Theme } from '@material-ui/core';
-import RepoForm from './RepoForm';
-import RepoError from './RepoError';
+import React, { useEffect, useState } from 'react';
+import { CircularProgress, makeStyles, Theme, Typography } from '@material-ui/core';
 import api from 'services/api';
-import RepoEmpty from './RepoEmpty';
-import RepoOwner from './RepoOwner';
 import Chip from '@material-ui/core/Chip';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -29,54 +25,36 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Repos: React.FC = () => {
   const classes = useStyles();
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [repos, setRepos] = useState<any[]>([]);
-  const [username, setUsername] = useState('');
-  const [error, setError] = useState('');
-  const [owner, setOwner] = useState<any>(null);
+  const { name, owner } = useParams();
+  const [repository, setRepository] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  function fetchRepositories(event?: FormEvent<HTMLFormElement>) {
-    event?.preventDefault();
-
-    if (!username) {
-      setRepos([]);
-      return;
-    }
-
-    setButtonDisabled(true);
-
+  useEffect(() => {
     api
-      .get(`/users/${username}/repos`)
+      .get(`/repos/${owner}/${name}`)
       .then(response => {
-        setRepos(response.data);
-        setOwner(response.data[0].owner);
+        setRepository(response.data);
       })
       .catch(error => {
         console.error(error);
-        setError(error.message);
-        setRepos([]);
       })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
-      .finally(() => setButtonDisabled(false));
-  }
+  console.log(repository);
 
   return (
     <div className={classes.container}>
       <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
 
-      <form className={classes.form} onSubmit={fetchRepositories}>
-        <RepoForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
-      </form>
-
-      {repos.length === 0 ? (
-        <RepoEmpty />
-      ) : error ? (
-        <RepoError error={error} setError={setError} />
+      {!loading ? (
+        <CircularProgress />
       ) : (
-        <>
-          <RepoOwner owner={owner} />
-          <RepoList repos={repos} />
-        </>
+        <div>
+          <Typography>{repository.name}</Typography>
+        </div>
       )}
     </div>
   );

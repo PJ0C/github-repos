@@ -9,7 +9,7 @@ const RoutesHandler: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Repos />} />
-        <Route path="/repos/:id" element={<RepoInfo />} />
+        <Route path="/repos/:owner/:name" element={<RepoInfo />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

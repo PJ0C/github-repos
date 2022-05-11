@@ -40,7 +40,7 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo }) => {
   const classes = styles();
 
   return (
-    <Link to={`/repos/${repo.name}`}>
+    <Link to={`/repos/${repo.owner.login}/${repo.name}`}>
       <ListItem button className={classes.li}>
         <Chip className={classes.chip} icon={<VisibilityIcon />} label={repo.visibility} />
         <Typography variant="h6" className={classes.repositoryname} key={repo.full_name}>
