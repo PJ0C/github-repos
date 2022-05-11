@@ -3,13 +3,13 @@ import React from 'react';
 import CodeIcon from '@material-ui/icons/Code';
 import Chip from '@material-ui/core/Chip';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import { Link } from 'react-router-dom';
 
 const styles = makeStyles({
   li: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    margin: '5px',
     boxShadow: '0 1px 4px 1px #ccc',
     borderRadius: 4,
     flex: 1,
@@ -40,16 +40,18 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo }) => {
   const classes = styles();
 
   return (
-    <ListItem button className={classes.li}>
-      <Chip className={classes.chip} icon={<VisibilityIcon />} label={repo.visibility} />
-      <Typography variant="h6" className={classes.repositoryname} key={repo.full_name}>
-        {repo.full_name}
-      </Typography>
-      <Typography color="textSecondary" variant="body2" className={classes.language} key={repo.language}>
-        <CodeIcon className={classes.icon} />
-        {repo.language}
-      </Typography>
-    </ListItem>
+    <Link to={`/repos/${repo.name}`}>
+      <ListItem button className={classes.li}>
+        <Chip className={classes.chip} icon={<VisibilityIcon />} label={repo.visibility} />
+        <Typography variant="h6" className={classes.repositoryname} key={repo.full_name}>
+          {repo.full_name}
+        </Typography>
+        <Typography color="textSecondary" variant="body2" className={classes.language} key={repo.language}>
+          <CodeIcon className={classes.icon} />
+          {repo.language}
+        </Typography>
+      </ListItem>
+    </Link>
   );
 };
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import Repos from './repos/Repos';
+import RoutesHandler from 'routes/RoutesHandler';
 
-function App() {
-  return <Repos />;
-}
+const App: React.FC = () => {
+  return <RoutesHandler />;
+};
 
 export default App;
