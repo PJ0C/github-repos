@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 
@@ -7,9 +7,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 interface RepoListItemProps {
-  namee: any;
-  infoname: any;
-  iconavatar: any;
+  namee: string;
+  infoname: string;
+  iconavatar: ReactElement;
 }
 
 const RepoListItem: React.FC<RepoListItemProps> = ({ namee, infoname, iconavatar }) => {

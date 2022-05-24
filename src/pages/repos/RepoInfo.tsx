@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { CircularProgress, makeStyles, Theme } from '@material-ui/core';
 import api from 'services/api';
 import RepoListItem from 'pages/repos/RepoListItem';
@@ -85,6 +85,20 @@ const Repos: React.FC = () => {
   const [repository, setRepository] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+  const repoInformations = useMemo(
+    () => [
+      {
+        name: 'Nome do Usuário',
+        infoname: repository.owner.login,
+      },
+      {
+        name: 'Nome do repositório',
+        infoname: repository.name,
+      },
+    ],
+    [repository],
+  );
+
   useEffect(() => {
     api
       .get(`/repos/${owner}/${name}`)
@@ -99,8 +113,6 @@ const Repos: React.FC = () => {
       });
   }, []);
 
-  console.log(repository);
-
   return (
     <div className={classes.container}>
       <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
@@ -108,15 +120,29 @@ const Repos: React.FC = () => {
       {loading ? (
         <CircularProgress />
       ) : (
-        <List className={classes.root}>
-          <RepoListItem namee="Nome do Usuário" infoname={repository.owner.login} iconavatar={<AccountBoxIcon />} />
-          <RepoListItem namee="Nome do repositório" infoname={repository.name} iconavatar={<FolderIcon />} />
-          <RepoListItem namee="ID do repositório" infoname={repository.id} iconavatar={<TurnedInNotIcon />} />
-          <RepoListItem namee="Criado em" infoname={repository.created_at} iconavatar={<TodayIcon />} />
-          <RepoListItem namee="Último update" infoname={repository.pushed_at} iconavatar={<EventAvailableIcon />} />
-          <RepoListItem namee="Linguagem utilizada" infoname={repository.language} iconavatar={<CodeIcon />} />
-          <RepoListItem namee="Visibilidade" infoname={repository.visibility} iconavatar={<VisibilityIcon />} />
-          <RepoListItem namee="Branch padrão" infoname={repository.default_branch} iconavatar={<DeviceHubIcon />} />
+        <>
+          <List className={classes.root}>
+            <RepoListItem namee="Nome do Usuário" infoname={repository.owner.login} iconavatar={<AccountBoxIcon />} />
+            <RepoListItem namee="Nome do repositório" infoname={repository.name} iconavatar={<FolderIcon />} />
+            <RepoListItem namee="ID do repositório" infoname={repository.id} iconavatar={<TurnedInNotIcon />} />
+            <RepoListItem namee="Criado em" infoname={repository.created_at} iconavatar={<TodayIcon />} />
+            <RepoListItem namee="Último update" infoname={repository.pushed_at} iconavatar={<EventAvailableIcon />} />
+            <RepoListItem namee="Linguagem utilizada" infoname={repository.language} iconavatar={<CodeIcon />} />
+            <RepoListItem namee="Visibilidade" infoname={repository.visibility} iconavatar={<VisibilityIcon />} />
+            <RepoListItem namee="Branch padrão" infoname={repository.default_branch} iconavatar={<DeviceHubIcon />} />
+          </List>
+
+          <List className={classes.root}>
+            {repoInformations.map(info => (
+              <RepoListItem
+                key={info.name}
+                namee={info.name}
+                infoname={info.infoname}
+                iconavatar={<AccountBoxIcon />}
+              />
+            ))}
+          </List>
+
           <div className={classes.user}>
             <div className={classes.alignback}>
               <Button variant="contained" color="primary" href="/">
@@ -130,7 +156,7 @@ const Repos: React.FC = () => {
               Link para o site do GitHub
             </Button>
           </div>
-        </List>
+        </>
       )}
     </div>
   );
