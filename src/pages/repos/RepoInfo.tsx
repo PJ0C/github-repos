@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { CircularProgress, makeStyles, Theme } from '@material-ui/core';
 import api from 'services/api';
+import RepoListItem from 'pages/repos/RepoListItem';
 import Chip from '@material-ui/core/Chip';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { useParams } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import Divider from '@material-ui/core/Divider';
 import FolderIcon from '@material-ui/icons/Folder';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import TodayIcon from '@material-ui/icons/Today';
@@ -56,7 +53,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(15),
     height: theme.spacing(15),
     border: `2px solid ${theme.palette.primary.main}`,
-    marginTop: '-560px',
+    marginTop: '20px',
+
     background: '#fff',
     padding: 3,
     '& img': {
@@ -74,6 +72,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   align: {
     marginLeft: '55px',
     margin: '0 0 20px',
+  },
+  alignback: {
+    marginTop: '-610px',
+    marginLeft: '-50px',
   },
 }));
 
@@ -107,78 +109,20 @@ const Repos: React.FC = () => {
         <CircularProgress />
       ) : (
         <List className={classes.root}>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <AccountBoxIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Nome do usuário" secondary={repository.owner.login} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <FolderIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Nome do repositório" secondary={repository.name} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <TurnedInNotIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="ID do repositório" secondary={repository.id} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <TodayIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Criado em" secondary={repository.created_at} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <EventAvailableIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Último update" secondary={repository.pushed_at} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <CodeIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Linguagem utilizada" secondary={repository.language} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <VisibilityIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Visibilidade" secondary={repository.visibility} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <DeviceHubIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Branch padrão" secondary={repository.default_branch} />
-          </ListItem>
+          <RepoListItem namee="Nome do Usuário" infoname={repository.owner.login} iconavatar={<AccountBoxIcon />} />
+          <RepoListItem namee="Nome do repositório" infoname={repository.name} iconavatar={<FolderIcon />} />
+          <RepoListItem namee="ID do repositório" infoname={repository.id} iconavatar={<TurnedInNotIcon />} />
+          <RepoListItem namee="Criado em" infoname={repository.created_at} iconavatar={<TodayIcon />} />
+          <RepoListItem namee="Último update" infoname={repository.pushed_at} iconavatar={<EventAvailableIcon />} />
+          <RepoListItem namee="Linguagem utilizada" infoname={repository.language} iconavatar={<CodeIcon />} />
+          <RepoListItem namee="Visibilidade" infoname={repository.visibility} iconavatar={<VisibilityIcon />} />
+          <RepoListItem namee="Branch padrão" infoname={repository.default_branch} iconavatar={<DeviceHubIcon />} />
           <div className={classes.user}>
+            <div className={classes.alignback}>
+              <Button variant="contained" color="primary" href="/">
+                Voltar
+              </Button>
+            </div>
             <div className={classes.align}>
               <Avatar alt="usuario" src={repository.owner.avatar_url} className={classes.avatar} />
             </div>
