@@ -16,6 +16,7 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import CodeIcon from '@material-ui/icons/Code';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeviceHubIcon from '@material-ui/icons/DeviceHub';
+import { ArrowBack } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -26,9 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
     minHeight: '100vh',
     [theme.breakpoints.down('xs')]: {
-      margin: '10px 0px 10px auto',
-      maxWidth: 350,
-      marginLeft: '5px',
+      margin: '0 0px 10px auto',
     },
     border: '2px solid #ddc6a3',
     padding: 20,
@@ -39,22 +38,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'grid',
     maxWidth: 300,
     backgroundColor: theme.palette.background.paper,
-    marginLeft: '100px',
-
-    marginTop: '30px',
-    [theme.breakpoints.down('xs')]: {
-      marginTop: '50px',
-      marginLeft: '50px',
-    },
+    [theme.breakpoints.down('xs')]: {},
   },
 
   avatar: {
     width: theme.spacing(15),
     height: theme.spacing(15),
     border: `2px solid ${theme.palette.primary.main}`,
-    marginTop: '50px',
-    marginLeft: '50px',
-
     background: '#fff',
     padding: 3,
     '& img': {
@@ -62,26 +52,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   user: {
-    maxWidth: '250px',
-
-    [theme.breakpoints.down('xs')]: {
-      marginLeft: '50px',
-    },
-  },
-  align: {
-    margin: '0 0 20px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 20,
+    [theme.breakpoints.down('xs')]: {},
   },
   alignback: {
     marginTop: '20px',
   },
-  alignallitens: {
+  content: {
     display: 'flex',
-    marginLeft: '80px',
     marginTop: '30px',
+    flex: 1,
+    justifyContent: 'space-around',
     [theme.breakpoints.down('xs')]: {
-      marginLeft: '0px',
       display: 'grid',
-      marginTop: '0px',
+      rowGap: '25px',
     },
   },
 }));
@@ -164,15 +151,13 @@ const Repos: React.FC = () => {
       ) : (
         <>
           <div className={classes.alignback}>
-            <Button variant="contained" color="primary" href="/">
+            <Button startIcon={<ArrowBack />} variant="text" color="primary" href="/">
               Voltar
             </Button>
           </div>
-          <div className={classes.alignallitens}>
+          <div className={classes.content}>
             <div className={classes.user}>
-              <div className={classes.align}>
-                <Avatar alt="usuario" src={repository.owner.avatar_url} className={classes.avatar} />
-              </div>
+              <Avatar alt="usuario" src={repository.owner.avatar_url} className={classes.avatar} />
               <Button variant="contained" color="primary" href={repository.html_url}>
                 Link para o site do GitHub
               </Button>
