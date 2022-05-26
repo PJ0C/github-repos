@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     margin: '30px auto',
     maxWidth: 800,
-    width: '100%',
+
     minHeight: '100vh',
-    [theme.breakpoints.down('md')]: {
-      margin: '30px 2px auto',
-      minHeight: '130vh',
+    [theme.breakpoints.down('xs')]: {
+      margin: '10px 0px 10px auto',
       maxWidth: 350,
+      marginLeft: '5px',
     },
     border: '2px solid #ddc6a3',
     padding: 20,
@@ -36,24 +36,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: 'white',
   },
   root: {
+    display: 'grid',
     maxWidth: 300,
     backgroundColor: theme.palette.background.paper,
-    marginLeft: '400px',
+    marginLeft: '100px',
 
-    marginTop: '50px',
+    marginTop: '30px',
     [theme.breakpoints.down('xs')]: {
-      marginTop: '200px',
+      marginTop: '50px',
       marginLeft: '50px',
     },
   },
-  form: {
-    marginTop: 40,
-  },
+
   avatar: {
     width: theme.spacing(15),
     height: theme.spacing(15),
     border: `2px solid ${theme.palette.primary.main}`,
-    marginTop: '20px',
+    marginTop: '50px',
+    marginLeft: '50px',
 
     background: '#fff',
     padding: 3,
@@ -63,19 +63,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   user: {
     maxWidth: '250px',
-    marginLeft: '-350px',
-    [theme.breakpoints.down('md')]: {
-      marginTop: '-770px',
-      marginLeft: '0px',
+
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: '50px',
     },
   },
   align: {
-    marginLeft: '55px',
     margin: '0 0 20px',
   },
   alignback: {
-    marginTop: '-610px',
-    marginLeft: '-50px',
+    marginTop: '20px',
+  },
+  alignallitens: {
+    display: 'flex',
+    marginLeft: '80px',
+    marginTop: '30px',
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: '0px',
+      display: 'grid',
+      marginTop: '0px',
+    },
   },
 }));
 
@@ -85,19 +92,54 @@ const Repos: React.FC = () => {
   const [repository, setRepository] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  const repoInformations = useMemo(
-    () => [
+  const repoInformations = useMemo(() => {
+    if (!repository) {
+      return [];
+    }
+
+    return [
       {
         name: 'Nome do Usuário',
         infoname: repository.owner.login,
+        iconavatar: <AccountBoxIcon />,
       },
       {
         name: 'Nome do repositório',
         infoname: repository.name,
+        iconavatar: <FolderIcon />,
       },
-    ],
-    [repository],
-  );
+      {
+        name: 'ID do repositório',
+        infoname: repository.id,
+        iconavatar: <TurnedInNotIcon />,
+      },
+      {
+        name: 'Criado em',
+        infoname: repository.created_at,
+        iconavatar: <TodayIcon />,
+      },
+      {
+        name: 'Último update',
+        infoname: repository.pushed_at,
+        iconavatar: <EventAvailableIcon />,
+      },
+      {
+        name: 'Linguagem utilizada',
+        infoname: repository.language,
+        iconavatar: <CodeIcon />,
+      },
+      {
+        name: 'Visibilidade',
+        infoname: repository.visibility,
+        iconavatar: <VisibilityIcon />,
+      },
+      {
+        name: 'Branch padrão',
+        infoname: repository.default_branch,
+        iconavatar: <DeviceHubIcon />,
+      },
+    ];
+  }, [repository]);
 
   useEffect(() => {
     api
@@ -121,40 +163,25 @@ const Repos: React.FC = () => {
         <CircularProgress />
       ) : (
         <>
-          <List className={classes.root}>
-            <RepoListItem namee="Nome do Usuário" infoname={repository.owner.login} iconavatar={<AccountBoxIcon />} />
-            <RepoListItem namee="Nome do repositório" infoname={repository.name} iconavatar={<FolderIcon />} />
-            <RepoListItem namee="ID do repositório" infoname={repository.id} iconavatar={<TurnedInNotIcon />} />
-            <RepoListItem namee="Criado em" infoname={repository.created_at} iconavatar={<TodayIcon />} />
-            <RepoListItem namee="Último update" infoname={repository.pushed_at} iconavatar={<EventAvailableIcon />} />
-            <RepoListItem namee="Linguagem utilizada" infoname={repository.language} iconavatar={<CodeIcon />} />
-            <RepoListItem namee="Visibilidade" infoname={repository.visibility} iconavatar={<VisibilityIcon />} />
-            <RepoListItem namee="Branch padrão" infoname={repository.default_branch} iconavatar={<DeviceHubIcon />} />
-          </List>
-
-          <List className={classes.root}>
-            {repoInformations.map(info => (
-              <RepoListItem
-                key={info.name}
-                namee={info.name}
-                infoname={info.infoname}
-                iconavatar={<AccountBoxIcon />}
-              />
-            ))}
-          </List>
-
-          <div className={classes.user}>
-            <div className={classes.alignback}>
-              <Button variant="contained" color="primary" href="/">
-                Voltar
+          <div className={classes.alignback}>
+            <Button variant="contained" color="primary" href="/">
+              Voltar
+            </Button>
+          </div>
+          <div className={classes.alignallitens}>
+            <div className={classes.user}>
+              <div className={classes.align}>
+                <Avatar alt="usuario" src={repository.owner.avatar_url} className={classes.avatar} />
+              </div>
+              <Button variant="contained" color="primary" href={repository.html_url}>
+                Link para o site do GitHub
               </Button>
             </div>
-            <div className={classes.align}>
-              <Avatar alt="usuario" src={repository.owner.avatar_url} className={classes.avatar} />
-            </div>
-            <Button variant="contained" color="primary" href={repository.html_url}>
-              Link para o site do GitHub
-            </Button>
+            <List className={classes.root}>
+              {repoInformations.map(info => (
+                <RepoListItem key={info.name} namee={info.name} infoname={info.infoname} iconavatar={info.iconavatar} />
+              ))}
+            </List>
           </div>
         </>
       )}
