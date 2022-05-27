@@ -14,11 +14,11 @@ const styles = makeStyles(theme => ({
   },
 }));
 
-interface RepoListItemProps {
+interface RepoListProps {
   repos: any[];
 }
 
-const RepoList: React.FC<RepoListItemProps> = ({ repos }) => {
+const RepoList: React.FC<RepoListProps> = ({ repos }) => {
   const classes = styles();
 
   return (

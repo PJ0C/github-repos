@@ -26,8 +26,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: 800,
 
     minHeight: '100vh',
-    [theme.breakpoints.down('xs')]: {
-      margin: '0 0px 10px auto',
+    [theme.breakpoints.down('sm')]: {
+      margin: '0px 0px 0px auto',
+      maxWidth: 1000,
     },
     border: '2px solid #ddc6a3',
     padding: 20,
