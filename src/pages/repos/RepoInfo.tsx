@@ -19,22 +19,6 @@ import DeviceHubIcon from '@material-ui/icons/DeviceHub';
 import { ArrowBack } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '30px auto',
-    maxWidth: 800,
-
-    minHeight: '100vh',
-    [theme.breakpoints.down('sm')]: {
-      margin: '0px 0px 0px auto',
-      maxWidth: 1000,
-    },
-    border: '2px solid #ddc6a3',
-    padding: 20,
-    borderRadius: 4,
-    backgroundColor: 'white',
-  },
   root: {
     display: 'grid',
     maxWidth: 300,
@@ -144,7 +128,7 @@ const Repos: React.FC = () => {
   }, []);
 
   return (
-    <div className={classes.container}>
+    <div>
       <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
 
       {loading ? (
@@ -159,7 +143,7 @@ const Repos: React.FC = () => {
           <div className={classes.content}>
             <div className={classes.user}>
               <Avatar alt="usuario" src={repository.owner.avatar_url} className={classes.avatar} />
-              <Button variant="contained" color="primary" href={repository.html_url}>
+              <Button variant="contained" target="_blank" color="primary" href={repository.html_url}>
                 Link para o site do GitHub
               </Button>
             </div>

@@ -10,18 +10,6 @@ import Chip from '@material-ui/core/Chip';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '30px auto',
-    maxWidth: 800,
-    width: '100%',
-    minHeight: '100vh',
-    border: '2px solid #ddc6a3',
-    padding: 20,
-    borderRadius: 4,
-    backgroundColor: 'white',
-  },
   form: {
     marginTop: 40,
   },
@@ -61,7 +49,7 @@ const Repos: React.FC = () => {
   }
 
   return (
-    <div className={classes.container}>
+    <div>
       <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
 
       <form className={classes.form} onSubmit={fetchRepositories}>
