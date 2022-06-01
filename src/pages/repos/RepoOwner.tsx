@@ -1,10 +1,7 @@
 import React from 'react';
 import { Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-
-interface RepoOwnerProps {
-  owner: any;
-}
+import { useApp } from 'providers/AppProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,8 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const RepoOwner: React.FC<RepoOwnerProps> = ({ owner }) => {
+const RepoOwner: React.FC = () => {
   const classes = useStyles();
+  const { owner } = useApp();
 
   return (
     <div className={classes.container}>

@@ -8,7 +8,7 @@ interface AppContextValue {
   setUsername: Dispatch<SetStateAction<string>>;
   error: string;
   setError: Dispatch<SetStateAction<string>>;
-  owner: string;
+  owner: any;
   setOwner: Dispatch<SetStateAction<any>>;
   loading: boolean;
 }

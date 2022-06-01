@@ -1,4 +1,5 @@
 import { List, makeStyles } from '@material-ui/core';
+import { useApp } from 'providers/AppProvider';
 import React from 'react';
 import RepoItem from './RepoItem';
 
@@ -14,12 +15,9 @@ const styles = makeStyles(theme => ({
   },
 }));
 
-interface RepoListProps {
-  repos: any[];
-}
-
-const RepoList: React.FC<RepoListProps> = ({ repos }) => {
+const RepoList: React.FC = () => {
   const classes = styles();
+  const { repos } = useApp();
 
   return (
     <List className={classes.ul} disablePadding>

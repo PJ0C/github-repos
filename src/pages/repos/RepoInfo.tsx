@@ -46,6 +46,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   alignback: {
     marginTop: '20px',
   },
+  teste: {
+    display: 'grid',
+  },
+  loading: {
+    margin: '300px 370px 20px auto',
+  },
   content: {
     display: 'flex',
     marginTop: '30px',
@@ -129,11 +135,11 @@ const Repos: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className={classes.teste}>
       <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
 
       {loading ? (
-        <CircularProgress />
+        <CircularProgress className={classes.loading} />
       ) : (
         <>
           <div className={classes.alignback}>
