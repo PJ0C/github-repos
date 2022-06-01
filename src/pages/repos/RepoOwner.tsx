@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const RepoOwner: React.FC<RepoOwnerProps> = ({ owner }) => {
   const classes = useStyles();
+
   return (
     <div className={classes.container}>
       <Avatar alt="usuario" src={owner?.avatar_url} className={classes.avatar} />

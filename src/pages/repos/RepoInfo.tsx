@@ -4,7 +4,6 @@ import api from 'services/api';
 import RepoListItem from 'pages/repos/RepoListItem';
 import Chip from '@material-ui/core/Chip';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import { useParams } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -17,6 +16,7 @@ import CodeIcon from '@material-ui/icons/Code';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeviceHubIcon from '@material-ui/icons/DeviceHub';
 import { ArrowBack } from '@material-ui/icons';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -63,6 +63,7 @@ const Repos: React.FC = () => {
   const { name, owner } = useParams();
   const [repository, setRepository] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const repoInformations = useMemo(() => {
     if (!repository) {
@@ -136,7 +137,7 @@ const Repos: React.FC = () => {
       ) : (
         <>
           <div className={classes.alignback}>
-            <Button startIcon={<ArrowBack />} variant="text" color="primary" href="/">
+            <Button startIcon={<ArrowBack />} variant="text" color="primary" onClick={() => navigate('/')}>
               Voltar
             </Button>
           </div>

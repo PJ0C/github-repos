@@ -1,13 +1,13 @@
-import React, { FormEvent, useState } from 'react';
+import React from 'react';
 import RepoList from './RepoList';
 import { makeStyles, Theme } from '@material-ui/core';
 import RepoForm from './RepoForm';
 import RepoError from './RepoError';
-import api from 'services/api';
 import RepoEmpty from './RepoEmpty';
 import RepoOwner from './RepoOwner';
 import Chip from '@material-ui/core/Chip';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import { useApp } from 'providers/AppProvider';
 
 const useStyles = makeStyles((theme: Theme) => ({
   form: {
@@ -17,43 +17,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Repos: React.FC = () => {
   const classes = useStyles();
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [repos, setRepos] = useState<any[]>([]);
-  const [username, setUsername] = useState('');
-  const [error, setError] = useState('');
-  const [owner, setOwner] = useState<any>(null);
-
-  function fetchRepositories(event?: FormEvent<HTMLFormElement>) {
-    event?.preventDefault();
-
-    if (!username) {
-      setRepos([]);
-      return;
-    }
-
-    setButtonDisabled(true);
-
-    api
-      .get(`/users/${username}/repos`)
-      .then(response => {
-        setRepos(response.data);
-        setOwner(response.data[0].owner);
-      })
-      .catch(error => {
-        console.error(error);
-        setError(error.message);
-        setRepos([]);
-      })
-
-      .finally(() => setButtonDisabled(false));
-  }
+  const { fetchRepositories, username, setUsername, loading, repos, error, setError, owner } = useApp();
 
   return (
     <div>
       <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
 
       <form className={classes.form} onSubmit={fetchRepositories}>
-        <RepoForm username={username} setUsername={setUsername} buttonDisabled={buttonDisabled} />
+        <RepoForm username={username} setUsername={setUsername} buttonDisabled={loading} />
       </form>
 
       {repos.length === 0 ? (
