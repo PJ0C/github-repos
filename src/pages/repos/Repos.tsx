@@ -1,6 +1,6 @@
 import React from 'react';
 import RepoList from './RepoList';
-import { makeStyles, Theme } from '@material-ui/core';
+import { CircularProgress, makeStyles, Theme } from '@material-ui/core';
 import RepoForm from './RepoForm';
 import RepoError from './RepoError';
 import RepoEmpty from './RepoEmpty';
@@ -30,7 +30,11 @@ const Repos: React.FC = () => {
         <RepoForm username={username} setUsername={setUsername} buttonDisabled={loading} />
       </form>
 
-      {repos.length === 0 ? (
+      {!loading ? (
+        <div>
+          <CircularProgress />
+        </div>
+      ) : repos.length === 0 ? (
         <RepoEmpty />
       ) : error ? (
         <RepoError error={error} setError={setError} />
