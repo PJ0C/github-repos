@@ -1,6 +1,6 @@
 import React from 'react';
 import RepoList from './RepoList';
-import { CircularProgress, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import RepoForm from './RepoForm';
 import RepoError from './RepoError';
 import RepoEmpty from './RepoEmpty';
@@ -8,6 +8,7 @@ import RepoOwner from './RepoOwner';
 import Chip from '@material-ui/core/Chip';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { useApp } from 'providers/AppProvider';
+import Loading from './Loading';
 
 const useStyles = makeStyles((theme: Theme) => ({
   form: {
@@ -30,9 +31,9 @@ const Repos: React.FC = () => {
         <RepoForm username={username} setUsername={setUsername} buttonDisabled={loading} />
       </form>
 
-      {!loading ? (
+      {loading ? (
         <div>
-          <CircularProgress />
+          <Loading />
         </div>
       ) : repos.length === 0 ? (
         <RepoEmpty />

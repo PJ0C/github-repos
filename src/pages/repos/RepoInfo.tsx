@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { CircularProgress, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import api from 'services/api';
 import RepoListItem from 'pages/repos/RepoListItem';
 import Chip from '@material-ui/core/Chip';
@@ -17,6 +17,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeviceHubIcon from '@material-ui/icons/DeviceHub';
 import { ArrowBack } from '@material-ui/icons';
 import { useParams, useNavigate } from 'react-router-dom';
+import Loading from './Loading';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -139,7 +140,7 @@ const Repos: React.FC = () => {
       <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
 
       {loading ? (
-        <CircularProgress className={classes.loading} />
+        <Loading />
       ) : (
         <>
           <div className={classes.alignback}>
