@@ -7,6 +7,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       display: 'flex',
+      [theme.breakpoints.down('xs')]: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 20,
+      },
       alignItems: 'center',
       columnGap: 20,
       margin: '30px 0',
@@ -21,7 +27,13 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRadius: '50%',
       },
     },
-    ownerData: {},
+    ownerData: {
+      [theme.breakpoints.down('xs')]: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      },
+    },
   }),
 );
 
