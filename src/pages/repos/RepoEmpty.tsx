@@ -4,7 +4,6 @@ import React from 'react';
 const styles = makeStyles({
   container: {
     display: 'flex',
-    marginTop: 300,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

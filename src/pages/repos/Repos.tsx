@@ -14,8 +14,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   form: {
     marginTop: 40,
   },
-  teste: {
-    display: 'grid',
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
   },
 }));
 
@@ -24,7 +26,7 @@ const Repos: React.FC = () => {
   const { fetchRepositories, username, setUsername, loading, repos, error, setError } = useApp();
 
   return (
-    <div className={classes.teste}>
+    <div className={classes.container}>
       <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
 
       <form className={classes.form} onSubmit={fetchRepositories}>
@@ -32,9 +34,7 @@ const Repos: React.FC = () => {
       </form>
 
       {loading ? (
-        <div>
-          <Loading />
-        </div>
+        <Loading />
       ) : repos.length === 0 ? (
         <RepoEmpty />
       ) : error ? (

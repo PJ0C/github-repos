@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'grid',
     maxWidth: 300,
     backgroundColor: theme.palette.background.paper,
-    [theme.breakpoints.down('xs')]: {},
+    gridAutoRows: 'min-content',
   },
 
   avatar: {
@@ -47,8 +47,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   alignback: {
     marginTop: '20px',
   },
-  teste: {
-    display: 'grid',
+  container: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
   },
   loading: {
     margin: '300px 370px 20px auto',
@@ -136,7 +138,7 @@ const Repos: React.FC = () => {
   }, []);
 
   return (
-    <div className={classes.teste}>
+    <div className={classes.container}>
       <Chip icon={<GitHubIcon />} label="Repositórios GitHub" />
 
       {loading ? (
